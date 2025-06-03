@@ -11,8 +11,7 @@ import {
   DollarSign, 
   TrendingUp, 
   Package,
-  Search,
-  Calendar
+  Search
 } from 'lucide-react'
 import { formatCurrency, formatDateSafe } from '@/lib/utils'
 

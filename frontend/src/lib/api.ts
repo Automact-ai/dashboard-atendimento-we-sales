@@ -245,12 +245,12 @@ export const dashboardApi = {
     return mockContactReasons
   },
   
-  getSalesOverTime: async (period: string = '30d'): Promise<TimeSeriesData[]> => {
+  getSalesOverTime: async (): Promise<TimeSeriesData[]> => {
     await new Promise(resolve => setTimeout(resolve, 500))
     return mockSalesOverTime
   },
   
-  getConversationsOverTime: async (period: string = '30d'): Promise<TimeSeriesData[]> => {
+  getConversationsOverTime: async (): Promise<TimeSeriesData[]> => {
     await new Promise(resolve => setTimeout(resolve, 500))
     return mockConversationsOverTime
   }

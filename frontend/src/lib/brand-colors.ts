@@ -94,6 +94,6 @@ export function getBrandColor(shade: keyof typeof BRAND_PALETTE): string {
 }
 
 // Função helper para verificar se uma cor é da marca
-export function isBrandColor(color: string): boolean {
-  return Object.values(BRAND_COLORS).includes(color as any);
+export function isBrandColor(color: string): color is (typeof BRAND_COLORS)[keyof typeof BRAND_COLORS] {
+  return Object.values(BRAND_COLORS).includes(color as (typeof BRAND_COLORS)[keyof typeof BRAND_COLORS]);
 } 

@@ -60,9 +60,9 @@ export default function DashboardPage() {
 
         // Aplicar filtros dos agentes aos dados
         let filteredMetrics = { ...metricsData }
-        let filteredProducts = [...productsData]
-        let filteredObjections = [...objectionsData]
-        let filteredReasons = [...reasonsData]
+        const filteredProducts = [...productsData]
+        const filteredObjections = [...objectionsData]
+        const filteredReasons = [...reasonsData]
         let filteredSalesData = [...salesTimeData]
         let filteredConversationsData = [...conversationsTimeData]
 

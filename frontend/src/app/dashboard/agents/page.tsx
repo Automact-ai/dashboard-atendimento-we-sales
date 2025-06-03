@@ -9,7 +9,6 @@ import {
   MessageSquare, 
   Star, 
   Clock,
-  Users,
   TrendingUp,
   Shield,
   DollarSign
