@@ -25,7 +25,6 @@ ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
 # Copiar arquivos de configuração
 COPY frontend/next.config.js ./
 COPY frontend/next.config.ts ./
-COPY frontend/tailwind.config.ts ./
 COPY frontend/postcss.config.mjs ./
 COPY frontend/tsconfig.json ./
 COPY frontend/components.json ./

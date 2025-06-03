@@ -1,5 +1,8 @@
 /** @type {import('next').NextConfig} */
 const nextConfig = {
+  // Configuração para Docker
+  output: 'standalone',
+  
   // Melhorar tratamento de erros de hidratação
   reactStrictMode: true,
   
