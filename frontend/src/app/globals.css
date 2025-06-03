@@ -1,0 +1,149 @@
+@import "tailwindcss";
+@import "tw-animate-css";
+
+@custom-variant dark (&:is(.dark *));
+
+@theme inline {
+  --color-background: var(--background);
+  --color-foreground: var(--foreground);
+  --font-sans: var(--font-geist-sans);
+  --font-mono: var(--font-geist-mono);
+  --color-sidebar-ring: var(--sidebar-ring);
+  --color-sidebar-border: var(--sidebar-border);
+  --color-sidebar-accent-foreground: var(--sidebar-accent-foreground);
+  --color-sidebar-accent: var(--sidebar-accent);
+  --color-sidebar-primary-foreground: var(--sidebar-primary-foreground);
+  --color-sidebar-primary: var(--sidebar-primary);
+  --color-sidebar-foreground: var(--sidebar-foreground);
+  --color-sidebar: var(--sidebar);
+  --color-chart-5: var(--chart-5);
+  --color-chart-4: var(--chart-4);
+  --color-chart-3: var(--chart-3);
+  --color-chart-2: var(--chart-2);
+  --color-chart-1: var(--chart-1);
+  --color-ring: var(--ring);
+  --color-input: var(--input);
+  --color-border: var(--border);
+  --color-destructive: var(--destructive);
+  --color-accent-foreground: var(--accent-foreground);
+  --color-accent: var(--accent);
+  --color-muted-foreground: var(--muted-foreground);
+  --color-muted: var(--muted);
+  --color-secondary-foreground: var(--secondary-foreground);
+  --color-secondary: var(--secondary);
+  --color-primary-foreground: var(--primary-foreground);
+  --color-primary: var(--primary);
+  --color-popover-foreground: var(--popover-foreground);
+  --color-popover: var(--popover);
+  --color-card-foreground: var(--card-foreground);
+  --color-card: var(--card);
+  --radius-sm: calc(var(--radius) - 4px);
+  --radius-md: calc(var(--radius) - 2px);
+  --radius-lg: var(--radius);
+  --radius-xl: calc(var(--radius) + 4px);
+
+  /* Cores da marca - Configuração direta no theme */
+  --color-brand-dark-navy: #091724;
+  --color-brand-navy: #091f2f;
+  --color-brand-light: #f9fbfc;
+  --color-brand-primary: #5e7bf9;
+  --color-brand-cyan: #a1feff;
+  --color-brand-50: #f0f8ff;
+  --color-brand-100: #e0f0ff;
+  --color-brand-200: #c7e2ff;
+  --color-brand-300: #a1d0ff;
+  --color-brand-400: #74b3ff;
+  --color-brand-500: #5e7bf9;
+  --color-brand-600: #4c63d2;
+  --color-brand-700: #3d4fa6;
+  --color-brand-800: #2c3a78;
+  --color-brand-900: #091f2f;
+  --color-brand-950: #091724;
+}
+
+:root {
+  --radius: 0.625rem;
+  
+  /* Tema escuro como padrão - usando 091724 e 091f2f */
+  --background: #091724; /* #091724 - Azul escuro profundo como background principal */
+  --foreground: #f9fbfc; /* #f9fbfc - Branco acinzentado para texto */
+  --card: #091f2f; /* #091f2f - Azul escuro secundário para cards */
+  --card-foreground: #f9fbfc;
+  --popover: #091f2f;
+  --popover-foreground: #f9fbfc;
+  --primary: #5e7bf9; /* #5e7bf9 - Azul primário da marca */
+  --primary-foreground: #f9fbfc;
+  --secondary: #1e2a3e; /* Tom ligeiramente mais claro para secondary */
+  --secondary-foreground: #f9fbfc;
+  --muted: #0f1a26; /* Tom intermediário entre as duas cores principais */
+  --muted-foreground: #94a3b8; /* Cinza claro para texto muted */
+  --accent: #a1feff; /* #a1feff - Cyan accent */
+  --accent-foreground: #091724;
+  --destructive: #ef4444; /* Vermelho para erro */
+  --border: #1e2a3e; /* Borda sutil usando tom mais claro */
+  --input: #1e2a3e; /* Input com fundo levemente mais claro */
+  --ring: #5e7bf9; /* Azul primário para focus */
+  
+  /* Cores para gráficos otimizadas para tema escuro */
+  --chart-1: #5e7bf9; /* Azul primário */
+  --chart-2: #a1feff; /* Cyan accent */
+  --chart-3: #74b3ff; /* Azul mais claro */
+  --chart-4: #a78bfa; /* Roxo claro */
+  --chart-5: #60a5fa; /* Azul céu */
+  
+  /* Sidebar para tema escuro */
+  --sidebar: #091f2f; /* #091f2f - Azul escuro secundário */
+  --sidebar-foreground: #f9fbfc;
+  --sidebar-primary: #5e7bf9; /* Azul primário */
+  --sidebar-primary-foreground: #f9fbfc;
+  --sidebar-accent: #a1feff; /* Cyan accent */
+  --sidebar-accent-foreground: #091724;
+  --sidebar-border: #1e2a3e;
+  --sidebar-ring: #5e7bf9;
+}
+
+.light {
+  /* Tema claro alternativo (se necessário) */
+  --background: #f9fbfc;
+  --foreground: #091724;
+  --card: #ffffff;
+  --card-foreground: #091724;
+  --popover: #ffffff;
+  --popover-foreground: #091724;
+  --primary: #5e7bf9;
+  --primary-foreground: #f9fbfc;
+  --secondary: #e8f0fe;
+  --secondary-foreground: #091724;
+  --muted: #f1f5f9;
+  --muted-foreground: #64748b;
+  --accent: #a1feff;
+  --accent-foreground: #091724;
+  --destructive: #dc2626;
+  --border: #e2e8f0;
+  --input: #f8fafc;
+  --ring: #5e7bf9;
+  
+  --chart-1: #5e7bf9;
+  --chart-2: #a1feff;
+  --chart-3: #091f2f;
+  --chart-4: #74b3ff;
+  --chart-5: #c7e2ff;
+  
+  --sidebar: #f9fbfc;
+  --sidebar-foreground: #091724;
+  --sidebar-primary: #5e7bf9;
+  --sidebar-primary-foreground: #f9fbfc;
+  --sidebar-accent: #a1feff;
+  --sidebar-accent-foreground: #091724;
+  --sidebar-border: #e2e8f0;
+  --sidebar-ring: #5e7bf9;
+}
+
+@layer base {
+  * {
+    @apply border-border outline-ring/50;
+  }
+  body {
+    @apply bg-background text-foreground;
+  }
+}

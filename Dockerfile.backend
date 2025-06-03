@@ -1,0 +1,57 @@
+# Use a imagem oficial do Node.js como base
+FROM node:18-alpine AS base
+
+# DASHBOARD DE ATENDIMENTO - BACKEND PRODUCTION
+# Sistema seguro e otimizado para API Express.js
+
+# Instalar dependências do sistema necessárias
+RUN apk add --no-cache \
+    python3 \
+    make \
+    g++ \
+    sqlite \
+    dumb-init
+
+# Criar usuário não-root para segurança
+RUN addgroup --system --gid 1001 apiuser
+RUN adduser --system --uid 1001 apiuser
+
+# Definir diretório de trabalho
+WORKDIR /app
+
+# Copiar arquivos de dependências primeiro (para otimizar cache)
+COPY backend/package*.json ./
+
+# Instalar dependências de produção
+RUN npm ci --only=production && npm cache clean --force
+
+# Copiar código fonte
+COPY backend/ .
+
+# Criar estrutura de diretórios necessária
+RUN mkdir -p \
+    uploads/profile-images \
+    database \
+    logs \
+    data && \
+    chown -R apiuser:apiuser \
+    uploads \
+    database \
+    logs \
+    data
+
+# Configurar permissões de segurança
+RUN chown -R apiuser:apiuser /app
+
+# Mudar para usuário não-root
+USER apiuser
+
+# Expor a porta da API
+EXPOSE 3001
+
+# Variáveis de ambiente
+ENV NODE_ENV=production
+ENV PORT=3001
+
+# Comando para iniciar o aplicativo com dumb-init para handling de sinais
+CMD ["dumb-init", "node", "api.js"] 

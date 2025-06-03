@@ -1,0 +1,75 @@
+# Use a imagem oficial do Node.js como base
+FROM node:18-alpine AS base
+
+# DASHBOARD DE ATENDIMENTO - FRONTEND PRODUCTION
+# Sistema otimizado para produção com Next.js 15
+
+# Instalar dependências apenas quando necessário
+FROM base AS deps
+RUN apk add --no-cache libc6-compat
+WORKDIR /app
+
+# Instalar dependências baseado no package manager
+COPY frontend/package.json frontend/package-lock.json* ./
+RUN npm ci
+
+# Reconstruir o código fonte apenas quando necessário
+FROM base AS builder
+WORKDIR /app
+COPY --from=deps /app/node_modules ./node_modules
+
+# Aceitar argumentos de build para variáveis NEXT_PUBLIC_*
+ARG NEXT_PUBLIC_API_URL
+ENV NEXT_PUBLIC_API_URL=$NEXT_PUBLIC_API_URL
+
+# Copiar arquivos de configuração
+COPY frontend/next.config.js ./
+COPY frontend/next.config.ts ./
+COPY frontend/tailwind.config.ts ./
+COPY frontend/postcss.config.mjs ./
+COPY frontend/tsconfig.json ./
+COPY frontend/components.json ./
+COPY frontend/eslint.config.mjs ./
+COPY frontend/package.json ./
+
+# Copiar código fonte preservando a estrutura
+COPY frontend/src ./src
+COPY frontend/public ./public
+
+# Desabilitar telemetria do Next.js durante o build
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Build da aplicação
+RUN npm run build
+
+# Imagem de produção, copiar arquivos e executar next
+FROM base AS runner
+WORKDIR /app
+
+ENV NODE_ENV=production
+ENV NEXT_TELEMETRY_DISABLED=1
+
+# Criar usuário não-root para segurança
+RUN addgroup --system --gid 1001 nodejs
+RUN adduser --system --uid 1001 nextjs
+
+# Copiar aplicação construída
+COPY --from=builder /app/public ./public
+
+# Criar diretório .next com permissões corretas
+RUN mkdir .next
+RUN chown nextjs:nodejs .next
+
+# Automaticamente aproveitar output traces para reduzir tamanho da imagem
+COPY --from=builder --chown=nextjs:nodejs /app/.next/standalone ./
+COPY --from=builder --chown=nextjs:nodejs /app/.next/static ./.next/static
+
+USER nextjs
+
+EXPOSE 3000
+
+ENV PORT=3000
+ENV HOSTNAME="0.0.0.0"
+
+# Comando de inicialização
+CMD ["node", "server.js"] 
