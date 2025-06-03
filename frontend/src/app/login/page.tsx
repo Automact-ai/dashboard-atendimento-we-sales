@@ -40,8 +40,8 @@ export default function LoginPage() {
   }
 
   return (
-    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-stone-50 to-stone-100 p-4">
-      <Card className="w-full max-w-md">
+    <div className="min-h-screen flex items-center justify-center bg-gradient-to-br from-black to-cyan-900 p-4">
+      <Card className="w-full max-w-md border border-gray-700">
         <CardHeader className="space-y-1 text-center">
           <div className="flex justify-center mb-4">
             <div className="p-3 bg-stone-900 rounded-full">
@@ -104,12 +104,6 @@ export default function LoginPage() {
               {isLoading ? 'Entrando...' : 'Entrar'}
             </Button>
           </form>
-          <div className="mt-6 text-center text-sm text-stone-600">
-            <p>Credenciais de teste:</p>
-            <p className="font-mono text-xs mt-1">
-              admin@dashboard.com / admin123
-            </p>
-          </div>
         </CardContent>
       </Card>
     </div>
